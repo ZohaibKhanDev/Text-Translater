@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.kotlinxSerialization)
     id("kotlin-kapt")
 }
-
+ 
 android {
     namespace = "com.example.texttranslater"
     compileSdk = 34
@@ -15,12 +15,12 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
+  
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
-    }
+    } 
 
     buildTypes {
         release {
