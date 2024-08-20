@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.kotlinxSerialization)
     id("kotlin-kapt")
 }
-
+ 
 android {
     namespace = "com.example.texttranslater"
     compileSdk = 34
@@ -15,12 +15,12 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
+  
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
-    }
+    } 
 
     buildTypes {
         release {
@@ -49,11 +49,11 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-}
+}  
 
-dependencies {
+dependencies { 
 
-    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.ktx) 
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
@@ -80,7 +80,7 @@ dependencies {
     // Room
     val room_version = "2.6.1"
 
-    implementation("androidx.room:room-runtime:$room_version")
+    implementation("androidx.room:room-runtime:$room_version") 
     kapt ("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
     implementation("media.kamel:kamel-image:0.9.4")
