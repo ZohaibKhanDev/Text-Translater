@@ -100,10 +100,11 @@ fun HomeScreen() {
         }
     }
 
+    
     Scaffold(topBar = {
         TopAppBar(title = {
             Text(
-                text = "Language Translator",
+                text = "Language Translator", 
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Medium,
                 color = Color.White
@@ -119,6 +120,7 @@ fun HomeScreen() {
             verticalArrangement = Arrangement.spacedBy(20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            
             Card(
                 modifier = Modifier.padding(13.dp),
                 elevation = CardDefaults.cardElevation(2.dp),
@@ -187,10 +189,7 @@ fun HomeScreen() {
                             .fillMaxWidth()
                             .height(120.dp), shape = RoundedCornerShape(0.dp)
                     )
-
                 }
-
-
             }
 
             Button(
@@ -205,7 +204,6 @@ fun HomeScreen() {
             ) {
                 Text(text = "Translate")
             }
-
 
             if (isLoading) {
                 CircularProgressIndicator()
