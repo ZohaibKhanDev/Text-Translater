@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.kotlinxSerialization) 
     id("kotlin-kapt")
 }
  
@@ -52,7 +52,6 @@ android {
 }  
 
 dependencies { 
-
     implementation(libs.androidx.core.ktx) 
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -79,7 +78,6 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:1.6.3")
     // Room
     val room_version = "2.6.1"
-
     implementation("androidx.room:room-runtime:$room_version") 
     kapt ("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
