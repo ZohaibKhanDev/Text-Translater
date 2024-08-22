@@ -52,6 +52,7 @@ android {
 }  
 
 dependencies { 
+
     implementation(libs.androidx.core.ktx) 
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -88,3 +89,4 @@ dependencies {
     implementation("io.insert-koin:koin-compose")
     implementation("io.insert-koin:koin-annotations:1.3.1")
 }
+
