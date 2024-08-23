@@ -64,7 +64,7 @@ object TranslaterApiClient {
         val response: List<TranslateItem> = client.post("$url&$languagesParam") {
             header("Content-Type", "application/json")
             header("x-rapidapi-host", "microsoft-translator-text.p.rapidapi.com")
-            header("x-rapidapi-key", "960edc122fmsh32d9e50d4d01ae2p14d535jsn88155bc7bbf7")
+            header("x-rapidapi-key", "0e3e36a41dmsh01f5d1b030cc6cfp103c0ejsn9c29801473d0")
             setBody("[{\"Text\":\"$text\"}]")
         }.body()
 

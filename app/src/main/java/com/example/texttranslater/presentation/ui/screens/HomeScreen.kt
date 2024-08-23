@@ -97,7 +97,38 @@ fun HomeScreen() {
         "Greek" to "el",
         "Polish" to "pl",
         "Czech" to "cs",
-        "Thai" to "th"
+        "Thai" to "th",
+        "Vietnamese" to "vi",
+        "Malay" to "ms",
+        "Persian" to "fa",
+        "Romanian" to "ro",
+        "Hungarian" to "hu",
+        "Hebrew" to "he",
+        "Danish" to "da",
+        "Finnish" to "fi",
+        "Norwegian" to "no",
+        "Ukrainian" to "uk",
+        "Croatian" to "hr",
+        "Slovak" to "sk",
+        "Serbian" to "sr",
+        "Bulgarian" to "bg",
+        "Indonesian" to "id",
+        "Malayalam" to "ml",
+        "Marathi" to "mr",
+        "Tamil" to "ta",
+        "Telugu" to "te",
+        "Kannada" to "kn",
+        "Gujarati" to "gu",
+        "Punjabi" to "pa",
+        "Sinhalese" to "si",
+        "Tagalog" to "tl",
+        "Swahili" to "sw",
+        "Zulu" to "zu",
+        "Afrikaans" to "af",
+        "Amharic" to "am",
+        "Somali" to "so",
+        "Yoruba" to "yo",
+        "Hausa" to "ha"
     )
 
     val availableLanguages = languageMap.keys.map { it to R.drawable.translate_icon }
@@ -106,7 +137,7 @@ fun HomeScreen() {
         is ResultState.Error -> {
             isLoading = false
             val error = (translationState as ResultState.Error).error
-            Text(text = error.toString())
+            translateData = error.toString()
         }
 
         ResultState.Loading -> {
@@ -115,7 +146,6 @@ fun HomeScreen() {
 
         is ResultState.Success -> {
             isLoading = false
-
             val success = (translationState as ResultState.Success).success
             translateData = success
         }
@@ -140,20 +170,20 @@ fun HomeScreen() {
             verticalArrangement = Arrangement.spacedBy(20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
             Card(
-                modifier = Modifier.padding(13.dp),
+                modifier = Modifier
+                    .padding(start = 13.dp, end = 13.dp, top = 24.dp)
+                    .fillMaxWidth()
+                    .height(47.dp),
                 elevation = CardDefaults.cardElevation(2.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = Color.Transparent,
                     disabledContainerColor = Color.Transparent,
-                )
+                ), shape = RoundedCornerShape(50.dp)
             ) {
                 Row(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(50.dp))
-                        .fillMaxWidth()
-                        .height(47.dp)
-                        .background(Color(0XFFf7f2f9)),
+                    modifier = Modifier.fillMaxSize().background(Color(0XFFf7f2f9)),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
@@ -172,6 +202,7 @@ fun HomeScreen() {
                     )
                 }
             }
+
 
             Card(
                 modifier = Modifier
@@ -203,7 +234,12 @@ fun HomeScreen() {
 
                     TextField(
                         value = inputText,
-                        onValueChange = { inputText = it },
+                        onValueChange = { newText ->
+                            inputText = newText
+                            val sourceCode = languageMap[sourceLanguage] ?: "en"
+                            val targetCode = languageMap[targetLanguage] ?: "es"
+                            viewModel.translateText(inputText, sourceCode, targetCode)
+                        },
                         colors = TextFieldDefaults.colors(
                             focusedIndicatorColor = Color.Transparent,
                             focusedContainerColor = Color.Transparent,
@@ -222,27 +258,11 @@ fun HomeScreen() {
                             )
                         }
                     )
-
-                    Button(
-                        onClick = {
-                            val sourceCode = languageMap[sourceLanguage] ?: "en"
-                            val targetCode = languageMap[targetLanguage] ?: "es"
-                            viewModel.translateText(inputText, sourceCode, targetCode)
-                        },
-                        modifier = Modifier
-                            .padding(7.dp)
-                            .width(108.dp)
-                            .align(Alignment.End)
-                            .height(40.dp),
-                        shape = RoundedCornerShape(100.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = Color(0XFFFF6600))
-                    ) {
-                        Text(text = "Translate")
-                    }
                 }
             }
 
             Spacer(modifier = Modifier.height(25.dp))
+
 
             Card(
                 modifier = Modifier
@@ -271,27 +291,23 @@ fun HomeScreen() {
                         )
                     }
 
+
                     if (isLoading) {
                         CircularProgressIndicator()
                     } else {
-                        SelectionContainer {
-                            translateData?.let {
-                                Text(
-                                    text = it,
-                                    fontSize = 16.sp,
-                                    fontWeight = FontWeight.Normal,
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(16.dp)
-                                )
-                            }
-                        }
+                        Text(
+                            text = translateData ?: "Translation will appear here",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Medium,
+                            modifier = Modifier.padding(16.dp)
+                        )
                     }
                 }
             }
         }
     }
 }
+
 
 @Composable
 fun LanguageSelector(
@@ -321,12 +337,6 @@ fun LanguageSelector(
             availableLanguages.forEach { language ->
                 DropdownMenuItem(
                     text = {
-                        Image(
-                            painter = painterResource(id = language.second),
-                            contentDescription = "${language.first} Flag",
-                            modifier = Modifier.size(iconSize)
-                        )
-                        Spacer(modifier = Modifier.width(10.dp))
                         Text(text = language.first)
                     },
                     onClick = {
