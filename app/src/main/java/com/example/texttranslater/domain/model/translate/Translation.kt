@@ -6,6 +6,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Translation(
-    @SerialName("translation")
-    val translation: String
+    @SerialName("alignment")
+    val alignment: Alignment?=null,
+    @SerialName("sentLen")
+    val sentLen: SentLen?=null,
+    @SerialName("text")
+    val text: String,
+    @SerialName("to")
+    val to: String
 )

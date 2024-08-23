@@ -13,17 +13,19 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     private val _translation = MutableStateFlow<ResultState<String>>(ResultState.Loading)
     val translation: StateFlow<ResultState<String>> = _translation.asStateFlow()
 
+
     private val _languageIdentification = MutableStateFlow<ResultState<String>>(ResultState.Loading)
     val languageIdentification: StateFlow<ResultState<String>> = _languageIdentification.asStateFlow()
 
     private val _availableLanguages = MutableStateFlow<ResultState<String>>(ResultState.Loading)
     val availableLanguages: StateFlow<ResultState<String>> = _availableLanguages.asStateFlow()
 
-    fun translateText(text: String, sourceLanguage: String,targetLanguage: String) {
+
+    fun translateText(text: String, sourceLanguage: String, targetLanguage: String) {
         viewModelScope.launch {
             _translation.value = ResultState.Loading
             try {
-                val response = repository.translateText(text,sourceLanguage, targetLanguage)
+                val response = repository.translateText(text, sourceLanguage, targetLanguage)
                 _translation.value = ResultState.Success(response)
             } catch (e: Exception) {
                 _translation.value = ResultState.Error(e)
