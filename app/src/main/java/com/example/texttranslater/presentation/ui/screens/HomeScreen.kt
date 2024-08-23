@@ -81,7 +81,6 @@ fun HomeScreen() {
         "Chinese" to R.drawable.translate_icon
     )
 
-
     when (translationState) {
         is ResultState.Error -> {
             isLoading = false
@@ -120,7 +119,6 @@ fun HomeScreen() {
             verticalArrangement = Arrangement.spacedBy(20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
             Card(
                 modifier = Modifier.padding(13.dp),
                 elevation = CardDefaults.cardElevation(2.dp),
@@ -189,7 +187,10 @@ fun HomeScreen() {
                             .fillMaxWidth()
                             .height(120.dp), shape = RoundedCornerShape(0.dp)
                     )
+
                 }
+
+
             }
 
             Button(
@@ -204,6 +205,7 @@ fun HomeScreen() {
             ) {
                 Text(text = "Translate")
             }
+
 
             if (isLoading) {
                 CircularProgressIndicator()
@@ -220,11 +222,12 @@ fun HomeScreen() {
                         )
                     }
                 }
+
             }
+
         }
     }
 }
-
 
 @Composable
 fun LanguageSelector(
