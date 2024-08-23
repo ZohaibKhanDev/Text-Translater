@@ -21,7 +21,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -168,11 +170,17 @@ fun HomeScreen() {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(5.dp),
-                        horizontalArrangement = Arrangement.SpaceAround,
+                            .padding(8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text(text = sourceLanguage)
+                        Text(
+                            text = sourceLanguage,
+                            color = Color(0XFF003366),
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Medium
+                        )
+                        Icon(imageVector = Icons.Outlined.Clear, contentDescription = "")
                     }
 
                     TextField(
@@ -188,22 +196,31 @@ fun HomeScreen() {
                             .height(120.dp), shape = RoundedCornerShape(0.dp)
                     )
 
+
+                    Button(
+                        onClick = {
+                            viewModel.translateText(
+                                inputText,
+                                sourceLanguage,
+                                targetLanguage
+                            )
+                        },
+                        modifier = Modifier
+                            .width(108.dp)
+                            .align(Alignment.End)
+                            .height(40.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0XFFFF6600))
+                    ) {
+                        Text(
+                            text = "Translate",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = Color.White
+                        )
+                    }
+
                 }
 
-
-            }
-
-            Button(
-                onClick = {
-
-                    val sourceCode = languageMap[sourceLanguage] ?: "en"
-                    val targetCode = languageMap[targetLanguage] ?: "es"
-                    viewModel.translateText(inputText, sourceCode, targetCode)
-                }, modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-            ) {
-                Text(text = "Translate")
             }
 
 
