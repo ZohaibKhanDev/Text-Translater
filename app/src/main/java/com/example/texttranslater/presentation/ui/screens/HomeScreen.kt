@@ -77,14 +77,30 @@ fun HomeScreen() {
     var isLoading by remember { mutableStateOf(false) }
 
     val languageMap = mapOf(
-        "English" to "en", "Spanish" to "es", "Chinese" to "zh"
+        "English" to "en",
+        "Spanish" to "es",
+        "Chinese" to "zh",
+        "French" to "fr",
+        "German" to "de",
+        "Japanese" to "ja",
+        "Korean" to "ko",
+        "Italian" to "it",
+        "Russian" to "ru",
+        "Arabic" to "ar",
+        "Hindi" to "hi",
+        "Portuguese" to "pt",
+        "Bengali" to "bn",
+        "Urdu" to "ur",
+        "Turkish" to "tr",
+        "Dutch" to "nl",
+        "Swedish" to "sv",
+        "Greek" to "el",
+        "Polish" to "pl",
+        "Czech" to "cs",
+        "Thai" to "th"
     )
 
-    val availableLanguages = listOf(
-        "English" to R.drawable.translate_icon,
-        "Spanish" to R.drawable.translate_icon,
-        "Chinese" to R.drawable.translate_icon
-    )
+    val availableLanguages = languageMap.keys.map { it to R.drawable.translate_icon }
 
     when (translationState) {
         is ResultState.Error -> {
@@ -165,7 +181,6 @@ fun HomeScreen() {
                 elevation = CardDefaults.cardElevation(1.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(0XFFf7f2f9))
             ) {
-
                 Column(
                     modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally
@@ -183,12 +198,11 @@ fun HomeScreen() {
                             fontWeight = FontWeight.Medium,
                             color = Color(0XFF003366)
                         )
-
-
                         Icon(imageVector = Icons.Default.Clear, contentDescription = "")
                     }
 
-                    TextField(value = inputText,
+                    TextField(
+                        value = inputText,
                         onValueChange = { inputText = it },
                         colors = TextFieldDefaults.colors(
                             focusedIndicatorColor = Color.Transparent,
@@ -206,14 +220,14 @@ fun HomeScreen() {
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.Medium
                             )
-                        })
-
+                        }
+                    )
 
                     Button(
                         onClick = {
-                            viewModel.translateText(
-                                inputText, "en", "es"
-                            )
+                            val sourceCode = languageMap[sourceLanguage] ?: "en"
+                            val targetCode = languageMap[targetLanguage] ?: "es"
+                            viewModel.translateText(inputText, sourceCode, targetCode)
                         },
                         modifier = Modifier
                             .padding(7.dp)
@@ -228,10 +242,7 @@ fun HomeScreen() {
                 }
             }
 
-
             Spacer(modifier = Modifier.height(25.dp))
-
-
 
             Card(
                 modifier = Modifier
@@ -241,7 +252,6 @@ fun HomeScreen() {
                 elevation = CardDefaults.cardElevation(1.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(0XFFf7f2f9))
             ) {
-
                 Column(
                     modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally
@@ -259,9 +269,7 @@ fun HomeScreen() {
                             fontWeight = FontWeight.Medium,
                             color = Color(0XFF003366)
                         )
-
                     }
-
 
                     if (isLoading) {
                         CircularProgressIndicator()
@@ -279,11 +287,8 @@ fun HomeScreen() {
                             }
                         }
                     }
-
                 }
             }
-
-
         }
     }
 }
@@ -298,9 +303,11 @@ fun LanguageSelector(
     var expanded by remember { mutableStateOf(false) }
 
     Box {
-        Row(verticalAlignment = Alignment.CenterVertically,
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(10.dp),
-            modifier = Modifier.clickable { expanded = true }) {
+            modifier = Modifier.clickable { expanded = true }
+        ) {
             Image(
                 painter = painterResource(id = availableLanguages.first { it.first == selectedLanguage }.second),
                 contentDescription = "$selectedLanguage Flag",
@@ -312,19 +319,21 @@ fun LanguageSelector(
 
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             availableLanguages.forEach { language ->
-                DropdownMenuItem(text = {
-                    Image(
-                        painter = painterResource(id = language.second),
-                        contentDescription = "${language.first} Flag",
-                        modifier = Modifier.size(iconSize)
-                    )
-                    Spacer(modifier = Modifier.width(10.dp))
-                    Text(text = language.first)
-
-                }, onClick = {
-                    onLanguageSelected(language.first)
-                    expanded = false
-                })
+                DropdownMenuItem(
+                    text = {
+                        Image(
+                            painter = painterResource(id = language.second),
+                            contentDescription = "${language.first} Flag",
+                            modifier = Modifier.size(iconSize)
+                        )
+                        Spacer(modifier = Modifier.width(10.dp))
+                        Text(text = language.first)
+                    },
+                    onClick = {
+                        onLanguageSelected(language.first)
+                        expanded = false
+                    }
+                )
             }
         }
     }
