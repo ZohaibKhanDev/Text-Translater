@@ -72,6 +72,7 @@ object TranslaterApiClient {
     }
 
 
+
     suspend fun identifyLanguage(text: String): String {
         val response: HttpResponse =
             client.post("https://api.apilayer.com/language_translation/identify") {

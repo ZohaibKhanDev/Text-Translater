@@ -20,7 +20,11 @@ import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.CopyAll
+import androidx.compose.material.icons.filled.IosShare
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -58,7 +62,6 @@ import com.example.texttranslater.R
 import com.example.texttranslater.domain.usecase.ResultState
 import com.example.texttranslater.presentation.viewmodel.MainViewModel
 import org.koin.compose.koinInject
-
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -170,77 +173,116 @@ fun HomeScreen() {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(8.dp),
+                            .padding(11.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
                             text = sourceLanguage,
-                            color = Color(0XFF003366),
                             fontSize = 16.sp,
-                            fontWeight = FontWeight.Medium
+                            fontWeight = FontWeight.Medium,
+                            color = Color(0XFF003366)
                         )
-                        Icon(imageVector = Icons.Outlined.Clear, contentDescription = "")
+
+
+                        Icon(imageVector = Icons.Default.Clear, contentDescription = "")
                     }
 
-                    TextField(
-                        value = inputText,
+                    TextField(value = inputText,
                         onValueChange = { inputText = it },
                         colors = TextFieldDefaults.colors(
                             focusedIndicatorColor = Color.Transparent,
                             focusedContainerColor = Color.Transparent,
                             unfocusedContainerColor = Color.Transparent,
                             unfocusedIndicatorColor = Color.Transparent
-                        ), modifier = Modifier
+                        ),
+                        modifier = Modifier
                             .fillMaxWidth()
-                            .height(120.dp), shape = RoundedCornerShape(0.dp)
-                    )
+                            .height(120.dp),
+                        shape = RoundedCornerShape(0.dp),
+                        placeholder = {
+                            Text(
+                                text = "Enter Text",
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Medium
+                            )
+                        })
 
 
                     Button(
                         onClick = {
                             viewModel.translateText(
-                                inputText,
-                                sourceLanguage,
-                                targetLanguage
+                                inputText, "en", "es"
                             )
                         },
                         modifier = Modifier
+                            .padding(7.dp)
                             .width(108.dp)
                             .align(Alignment.End)
                             .height(40.dp),
+                        shape = RoundedCornerShape(100.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0XFFFF6600))
                     ) {
-                        Text(
-                            text = "Translate",
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Medium,
-                            color = Color.White
-                        )
+                        Text(text = "Translate")
                     }
-
                 }
-
             }
 
 
-            if (isLoading) {
-                CircularProgressIndicator()
-            } else {
-                SelectionContainer {
-                    translateData?.let {
+            Spacer(modifier = Modifier.height(25.dp))
+
+
+
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(15.dp)
+                    .height(216.dp),
+                elevation = CardDefaults.cardElevation(1.dp),
+                colors = CardDefaults.cardColors(containerColor = Color(0XFFf7f2f9))
+            ) {
+
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(11.dp),
+                        horizontalArrangement = Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
                         Text(
-                            text = it,
+                            text = targetLanguage,
                             fontSize = 16.sp,
-                            fontWeight = FontWeight.Normal,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp)
+                            fontWeight = FontWeight.Medium,
+                            color = Color(0XFF003366)
                         )
-                    }
-                }
 
+                    }
+
+
+                    if (isLoading) {
+                        CircularProgressIndicator()
+                    } else {
+                        SelectionContainer {
+                            translateData?.let {
+                                Text(
+                                    text = it,
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight.Normal,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(16.dp)
+                                )
+                            }
+                        }
+                    }
+
+                }
             }
+
 
         }
     }

@@ -7,9 +7,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Translation(
     @SerialName("alignment")
-    val alignment: Alignment?=null,
+    val alignment: Alignment? = null,
     @SerialName("sentLen")
-    val sentLen: SentLen?=null,
+    val sentLen: SentLen? = null,
     @SerialName("text")
     val text: String,
     @SerialName("to")
