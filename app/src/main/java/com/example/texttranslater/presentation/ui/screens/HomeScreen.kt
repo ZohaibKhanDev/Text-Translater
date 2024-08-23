@@ -88,7 +88,7 @@ fun HomeScreen() {
     var translateData by remember { mutableStateOf<String?>(null) }
 
     var sourceLanguage by remember { mutableStateOf("English") }
-    var targetLanguage by remember { mutableStateOf("Spanish") }
+    var targetLanguage by remember { mutableStateOf("Urdu") }
     var isLoading by remember { mutableStateOf(false) }
 
 
@@ -117,6 +117,7 @@ fun HomeScreen() {
         "English" to "en",
         "Spanish" to "es",
         "Chinese" to "zh",
+        "Saraiki" to "skr",
         "French" to "fr",
         "German" to "de",
         "Japanese" to "ja",
@@ -213,7 +214,7 @@ fun HomeScreen() {
                     .padding(start = 13.dp, end = 13.dp, top = 24.dp)
                     .fillMaxWidth()
                     .height(47.dp),
-                elevation = CardDefaults.cardElevation(2.dp),
+                elevation = CardDefaults.cardElevation(3.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = Color.Transparent,
                     disabledContainerColor = Color.Transparent,
@@ -248,7 +249,7 @@ fun HomeScreen() {
                     .fillMaxWidth()
                     .padding(15.dp)
                     .height(216.dp),
-                elevation = CardDefaults.cardElevation(1.dp),
+                elevation = CardDefaults.cardElevation(3.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(0XFFf7f2f9))
             ) {
                 Column(
@@ -273,6 +274,7 @@ fun HomeScreen() {
                             contentDescription = "",
                             modifier = Modifier.clickable {
                                 inputText = ""
+                                translateData=null
                             })
                     }
 
@@ -281,8 +283,12 @@ fun HomeScreen() {
                         onValueChange = { newText ->
                             inputText = newText
                             val sourceCode = languageMap[sourceLanguage] ?: "en"
-                            val targetCode = languageMap[targetLanguage] ?: "es"
-                            viewModel.translateText(inputText, sourceCode, targetCode)
+                            val targetCode = languageMap[targetLanguage] ?: "ur"
+                            if (inputText.isNotBlank()) {
+                                viewModel.translateText(inputText, sourceCode, targetCode)
+                            } else {
+                                translateData = null
+                            }
                         },
                         colors = TextFieldDefaults.colors(
                             focusedIndicatorColor = Color.Transparent,
@@ -313,7 +319,7 @@ fun HomeScreen() {
                     .fillMaxWidth()
                     .padding(15.dp)
                     .height(216.dp),
-                elevation = CardDefaults.cardElevation(1.dp),
+                elevation = CardDefaults.cardElevation(3.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(0XFFf7f2f9))
             ) {
                 Column(
@@ -344,7 +350,7 @@ fun HomeScreen() {
                     } else {
                         Text(
                             text = translateData ?: "Translation will appear here",
-                            fontSize = 14.sp,
+                            fontSize = 17.sp,
                             fontWeight = FontWeight.Medium,
                             modifier = Modifier
                                 .align(Alignment.Start)
