@@ -19,4 +19,4 @@ Let's chat about potential projects, job opportunities, or any other collaborati
 | --- | --- | --- |
 | ![Screenshot 4](https://github.com/ZohaibKhanDev/Text-Translater/blob/master/screenshots/4.png) | ![Screenshot 5](https://github.com/ZohaibKhanDev/Text-Translater/blob/master/screenshots/5.png) | ![Screenshot 6](https://github.com/ZohaibKhanDev/Text-Translater/blob/master/screenshots/6.png) |
 | --- | --- | --- |
-| ![Screenshot 7](https://github.com/ZohaibKhanDev/Text-Translater/blob/master/screenshots/7png) | ![Screenshot 8](https://github.com/ZohaibKhanDev/Text-Translater/blob/master/screenshots/8.png) | ![Screenshot 9](https://github.com/ZohaibKhanDev/Text-Translater/blob/master/screenshots/9.png) |
+| ![Screenshot 7](https://github.com/ZohaibKhanDev/Text-Translater/blob/master/screenshots/7.png) | ![Screenshot 8](https://github.com/ZohaibKhanDev/Text-Translater/blob/master/screenshots/8.png) | ![Screenshot 9](https://github.com/ZohaibKhanDev/Text-Translater/blob/master/screenshots/9.png) |
