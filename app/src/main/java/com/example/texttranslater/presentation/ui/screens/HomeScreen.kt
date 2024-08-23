@@ -174,7 +174,6 @@ fun HomeScreen() {
         "Zulu" to "zu"
     )
 
-
     val availableLanguages = languageMap.keys.map { it to R.drawable.translate_icon }
 
     when (translationState) {
