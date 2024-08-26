@@ -206,6 +206,7 @@ fun HomeScreen() {
             Icon(imageVector = Icons.Default.Menu, contentDescription = "", tint = Color.White)
         }, colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0XFF003366)))
     }) {
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
